@@ -1,50 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import AddTodo from './components/AddTodo';
-import TodoList from './components/TodoList';
-import Filter from './components/Filter';
-import Search from './components/Search';
+import Navigation from './components/Navigation';
+import HomePage from './pages/HomePage';
+import SharedTodosPage from './pages/SharedTodosPage';
 
 function App() {
-  const [todos, setTodos] = useState([]);
-  const [filter, setFilter] = useState('all');
-  const [search, setSearch] = useState('');
-
-  const addTodo = (text) => {
-    const newTodo = {
-      id: Date.now(),
-      text,
-      completed: false,
-    };
-    setTodos([...todos, newTodo]);
-  };
-
-  const toggleTodo = (id) => {
-    setTodos(todos.map(todo =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    ));
-  };
-
-  const deleteTodo = (id) => {
-    setTodos(todos.filter(todo => todo.id !== id));
-  };
-
-  const filteredTodos = todos.filter(todo => {
-    const matchesFilter = filter === 'all' ||
-      (filter === 'active' && !todo.completed) ||
-      (filter === 'completed' && todo.completed);
-    const matchesSearch = todo.text.toLowerCase().includes(search.toLowerCase());
-    return matchesFilter && matchesSearch;
-  });
-
   return (
-    <div className="App">
-      <h1>To-Do List</h1>
-      <Search setSearch={setSearch} />
-      <AddTodo addTodo={addTodo} />
-      <Filter setFilter={setFilter} />
-      <TodoList todos={filteredTodos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
-    </div>
+    <Router>
+      <div className="app">
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/shared" element={<SharedTodosPage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
