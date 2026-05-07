@@ -6,7 +6,6 @@ function SharedTodosPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // useEffect: загрузка todos с API при загрузке компонента
   useEffect(() => {
     const fetchTodos = async () => {
       try {
@@ -16,7 +15,12 @@ function SharedTodosPage() {
           throw new Error('Failed to fetch todos');
         }
         const data = await response.json();
-        setTodos(data);
+        const normalized = data.map(item => ({
+          id: item.id,
+          text: item.title,
+          completed: item.completed,
+        }));
+        setTodos(normalized);
         setError(null);
       } catch (err) {
         setError(err.message);
@@ -49,7 +53,7 @@ function SharedTodosPage() {
 
   return (
     <div className="page-container">
-      <h1>Shared Todos (from API)</h1>
+      <h1>API Todos</h1>
       <p style={{ fontSize: '12px', color: '#666' }}>
         Data loaded from JSONPlaceholder API
       </p>

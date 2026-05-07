@@ -8,13 +8,11 @@ import SharedTodosPage from './pages/SharedTodosPage';
 function App() {
   return (
     <Router>
-      <div className="app">
-        <Navigation />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/shared" element={<SharedTodosPage />} />
-        </Routes>
-      </div>
+      <Navigation />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/shared" element={<SharedTodosPage />} />
+      </Routes>
     </Router>
   );
 }

@@ -9,7 +9,6 @@ function HomePage() {
   const [filter, setFilter] = useState('all');
   const [search, setSearch] = useState('');
 
-  // useEffect: загрузка todos из LocalStorage при загрузке компонента
   useEffect(() => {
     const savedTodos = localStorage.getItem('myTodos');
     if (savedTodos) {
@@ -17,7 +16,6 @@ function HomePage() {
     }
   }, []);
 
-  // useEffect: сохранение todos в LocalStorage при изменении
   useEffect(() => {
     localStorage.setItem('myTodos', JSON.stringify(todos));
   }, [todos]);
