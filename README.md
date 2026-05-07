@@ -32,5 +32,3 @@ src/
 - React Router v6
 - Fetch API
 - LocalStorage
-
-## Смотрите REPORT.md для подробного описания
